@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.invoi.mapper.SaleMapper">
+    <!-- 自定义返回结果集-->
+    <resultMap id="saleMap" type="Sale">
+        <id property="id" column="id"/>
+        <result property="price" column="price"/>
+        <result property="quantity" column="quantity"/>
+        <result property="totalPrice" column="totalPrice"/>
+        <result property="salDate" column="salDate"/>
+        <association property="users" javaType="Users" resultMap="userResult"/>
+        <association property="product" javaType="Product" resultMap="proResult"/>
+    </resultMap>
+    <resultMap id="userResult" type="Users">
+        <id property="id" column="u_id"/>
+        <result property="realName" column="realName"/>
+    </resultMap>
+    <resultMap id="proResult" type="Product">
+        <id property="id" column="p_id"/>
+        <result property="productName" column="productName"/>
+    </resultMap>
+
+   <select id="getAllSale" resultMap="saleMap">
+    SELECT s.id,s.price,s.quantity,s.salDate,s.totalPrice,p.id p_id,
+     p.productName,u.id u_id,u.realName from sale s,users u,product p
+      WHERE s.userId=u.id and s.productId=p.id ORDER BY ${ord} DESC LIMIT #{start},#{size}
+   </select>
+    <select id="getCnt" resultType="int">
+        select count(1) from sale
+    </select>
+    <select id="getOrdList" resultType="Ord">
+        select id,ordName,ordVal from ord
+    </select>
+    <insert id="saveSale">
+        INSERT into sale(price,quantity,totalPrice,salDate,userId,productId)
+        VALUES(#{price},#{quantity},#{totalPrice},NOW(),#{userId},#{productId})
+    </insert>
+</mapper>

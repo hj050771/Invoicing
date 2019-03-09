@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.invoi.mapper.UsersMapper">
+   <select id="getUserByName" resultType="Users">
+      SELECT u.id,u.userName,u.`password`,u.realName FROM users u
+       WHERE u.userName=#{userName} and u.`password`=#{password}
+   </select>
+</mapper>

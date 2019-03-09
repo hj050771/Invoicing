@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dj.invoi.mapper.ProductMapper">
+  <!-- <select id="getAllProduct" resultType="Product">
+     SELECT id,productName,quantity FROM product
+     where quantity=#{quantity}
+       <if test="productName!= null">
+           AND productName=#{productName}
+       </if>
+   </select>-->
+    <update id="updateProduct">
+        UPDATE product set quantity=quantity-#{quantity} WHERE id=#{id}
+    </update>
+</mapper>

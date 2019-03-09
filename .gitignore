@@ -1,0 +1,7 @@
+src/main/webapp/WEB-INF/classes
+src/main/webapp/WEB-INF/lib
+out/
+**/.idea
+**/*.iml
+**/*.log
+resource-local
